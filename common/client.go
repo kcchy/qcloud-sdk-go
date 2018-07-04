@@ -14,6 +14,8 @@ import (
 // RemovalPolicy=["a", "b"] => RemovalPolicy.1="a" RemovalPolicy.2="b"
 type FlattenArray []string
 
+type FlattenMultiDimensionalArray [][]string
+
 type Client struct {
 	SecretId    string
 	SecretKey   string

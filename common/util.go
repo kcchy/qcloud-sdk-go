@@ -25,6 +25,25 @@ func FlattenFn(fieldName string, field reflect.Value, values *url.Values) {
 	}
 }
 
+func FlattenMultiDimensionalFn(fieldName string, field reflect.Value, values *url.Values) {
+	l := field.Len()
+	if l > 0 {
+		for i := 0; i < l; i++ {
+			subArray := field.Index(i)
+			J := subArray.Len()
+			for j := 0; j < J; j++ {
+				str := subArray.Index(j).String()
+				if j == 0 {
+					values.Set(fieldName+"."+strconv.Itoa(i)+"."+"name", str)
+				}
+				if j == 1 {
+					values.Set(fieldName+"."+strconv.Itoa(i)+"."+"value", str)
+				}
+			}
+		}
+	}
+}
+
 //ConvertToParamValues converts the struct to url.Values
 func ConvertToparamValues(ifc interface{}, uppercase bool) url.Values {
 	values := url.Values{}
@@ -132,6 +151,8 @@ func setParamValues(i interface{}, values *url.Values, prefix string, uppercase 
 		case reflect.Slice:
 			if field.Type().Name() == "FlattenArray" {
 				FlattenFn(fieldName, field, values)
+			} else if field.Type().Name() == "FlattenMultiDimensionalArray" {
+				FlattenMultiDimensionalFn(fieldName, field, values)
 			} else {
 				switch field.Type().Elem().Kind() {
 				case reflect.Uint8:
