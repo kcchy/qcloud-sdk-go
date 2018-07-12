@@ -7,3 +7,4 @@ This is an unofficial Go SDK for Tencent QCloud Services. You are welcome for co
 * AS  [Auto Scaling](https://cloud.tencent.com/document/api/377/3170)
 * CLB [Cloud Load Balancer](https://cloud.tencent.com/document/api/214/888)
 * CDN [Content Delivery Network](https://cloud.tencent.com/document/api/228/1722)
+* Monitor [Tencent Cloud Monitor](https://cloud.tencent.com/document/api/248/13527)
